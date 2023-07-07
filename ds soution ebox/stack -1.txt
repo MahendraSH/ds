@@ -1,0 +1,337 @@
+lab
+1)  STACK OPERATIONS ->Stack 1 Ignore -- i-Lab
+#include<stdio.h>
+#include<stdlib.h>
+struct stack
+{
+    int *a;
+    int top;
+    int maxSize;
+};
+void pal(struct stack *s)
+{
+    if(s->top==-1)
+    {
+        printf("Stack contents are palindrome\n");
+        return;
+    }
+    int n=s->top;
+    n=n/2;
+    for(int i=0;i<=n;i++)
+    {
+        if(s->a[i]!=s->a[s->top-i])
+        {
+            printf("Stack contents are not palindrome\n");
+            return ;
+        }
+    }
+    printf("Stack contents are palindrome\n");
+}
+struct stack* push(struct stack *s ,int ele)
+{
+   int i= ++s->top;
+    s->a[i]=ele;
+    // printf("s->a[i]=ele %d %d \n",s->a[i],ele);
+    // printf("%d\n",i);
+    return s;
+}
+struct stack * pop(struct stack *s )
+{
+    if(s->top==-1)
+    {
+        printf("Stack is Underflow\n");
+        return s;
+        
+        
+    }
+    else
+    {
+        printf("Popped element is %d\n",s->a[s->top]);
+        s->top--;
+        printf("The stack contents are\n");
+        if(s->top==-1)
+        {
+         printf("Stack is Empty\n");   
+        }
+        else
+        {
+            
+            for(int i=s->top;i>=0;i--)
+            {
+                printf("%d",s->a[i]);
+            }
+        }
+    }
+    return s;
+}
+int main()
+{
+    int n;
+    struct stack *s=(struct stack*)malloc(sizeof(struct stack));
+    s->a=(int*)malloc(sizeof(int));
+    s->top=-1;
+    s->maxSize=3;
+    printf("MAIN MENU\n");
+    printf("1 PUSH\n");
+    printf("2 POP\n");
+    printf("3 Check for PALINDROME\n");
+    printf("4 Exit\n");
+    printf("Enter Your Choice\n");
+    scanf("%d",&n);
+    while(n!=4)
+    {
+        if(n==1)
+        {
+            printf("Enter a element to be pushed\n");
+            int ele;
+            scanf("%d",&ele);
+            if(s->top!=s->maxSize)
+           s= push(s,ele);
+            else
+             printf("Stack is Overflow\n");
+            printf("The stack contents are\n");
+            for(int i=s->top;i>=0;i--)
+            {
+                printf("%d\n",s->a[i]);
+            }
+            // printf("top=%d\n",s->top);
+            // printf("%d\n",s->a[0]);
+            // printf("%d\n",ele);
+        }
+        else if(n==2)
+        {
+            s=pop(s);
+        }
+        else
+        {
+        //   if(pal())
+        //   {
+        //       printf("Stack contents are palindrome\n");
+        //   }
+        //   else
+        //   {
+        //       printf("Stack contents are not palindrome\n");
+        //   }
+        pal(s);
+        s->top=-1;
+        }
+    printf("MAIN MENU\n");
+    printf("1 PUSH\n");
+    printf("2 POP\n");
+    printf("3 Check for PALINDROME\n");
+    printf("4 Exit\n");
+    printf("Enter Your Choice\n");
+    scanf("%d",&n);
+    }
+    printf("Exit\n");
+    // scanf("%d",&n);
+    
+    
+}
+---------------------------------------------------------------------------------------------------------------
+2)STACK OPERATIONS -> STACK OPERATIONS
+#include<stdio.h>
+#include<stdlib.h>
+struct stack
+{
+    int *a;
+    int top;
+    int maxSize;
+};
+void push(struct stack *s,int ele)
+{
+ s->top++;
+ s->a[s->top]=ele;
+}
+void pop(struct stack*s)
+{
+    s->top--;
+}
+void display(struct stack *s)
+{printf("The stack contents are\n");
+    if(s->top==-1)
+    {
+        printf("Stack is Empty\n");
+        return;
+    }
+    // printf("The stack contents are\n");
+    for(int i=s->top;i>=0;i--)
+    {
+        printf("%d\n",s->a[i]);
+    }
+}
+int main()
+{
+    struct stack *s=(struct stack*)malloc(sizeof(struct stack));
+    s->maxSize=3;
+    s->top=-1;
+    s->a=(int *)malloc(sizeof(int)*4);
+    int n;
+    printf("MAIN MENU\n");
+    printf("1 PUSH\n");
+    printf("2 POP\n");
+    printf("3 Display\n");
+    printf("4 Exit\n");
+    printf("Enter Your Choice\n");
+    scanf("%d",&n);
+    while(n!=4)\
+    {
+        if(n==1)
+        {int ele;
+            printf("Enter an element to be pushed\n");
+            scanf("%d ",&ele);
+            if(s->top==s->maxSize)
+            printf("Stack Overflow\n");
+            else
+            push(s,ele);
+            display(s);
+        }
+        else if(n==2)
+        {
+          if(s->top==-1)
+          {
+              printf("Stack Underflow\n");
+          }
+          else
+          {
+              printf("Popped element is %d",s->a[s->top]);
+              pop(s);
+              display(s);
+          }
+        //   if(n==3)
+        //   {
+        //       display(s);
+        //   }
+        }
+        if(n==3)
+          {
+              display(s);
+          }
+        
+    printf("MAIN MENU\n");
+    printf("1 PUSH\n");
+    printf("2 POP\n");
+    printf("3 Display\n");
+    printf("4 Exit\n");
+    printf("Enter Your Choice\n");
+    scanf("%d",&n);
+    }
+    printf("Exit\n");
+}
+=========================================================================================================
+Stack 1 -- i-Practice
+1)
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node* next;
+};
+struct node* Push(struct node *start)
+{
+    struct node * n=(struct node*)malloc(sizeof(struct node ));
+    n->next=0;
+   int ele;
+   printf("Enter the value\n");
+   scanf("%d",&ele);
+   n->data=ele;
+   if(start==0)
+   {
+       printf("Item %d pushed\n",ele);
+    start=n;
+    return start;
+   }
+   struct node *p=start;
+   while(p->next!=0)
+   {
+       p=p->next;
+   }
+   p->next=n;
+   printf("Item %d pushed\n",ele);
+   return start;
+}
+struct node* Pop(struct node*start)
+{
+    if(start==0)
+    {
+        printf("Stack underflow\n");
+        return 0;
+    }
+    if(start->next==0)
+    {
+        printf("Item %d popped\n",start->data);
+     free(start->next);
+     
+     return 0;
+    }
+    struct node *p=start;
+    while(p!=0)
+    {
+        if(p->next->next==0)
+        {
+            printf("Item %d popped\n",p->next->data);
+            free(p->next);
+            p->next=0;
+            return start;
+        }
+        p=p->next;
+    }
+    return start;
+}
+void display(struct node *start)
+{
+    if(start==0)
+    {
+        return;
+    }
+    display(start->next);
+    printf("%d\n",start->data);
+}
+int main()
+{
+    struct node *start=0;
+    int n;
+    printf("1.Push\n");
+    printf("2.Pop\n");
+    printf("3.Show\n");
+    printf("4.Exit\n");
+    printf("Enter your choice\n");
+    scanf("%d",&n);
+    while(n!=4)
+    {
+        if(n==1)
+        {
+          start=Push(start);
+        }
+        else if(n==2)
+        {
+            start=Pop(start);
+        }
+        else if(n==3)
+        {
+            if(start==0)
+         {
+        printf("Stack is empty\n");
+        // return ;
+          }
+            else
+            {
+                    printf("Printing Stack elements\n");
+            }
+             display(start);
+        }
+        else
+        {
+            printf("Wrong choice\n");
+            return 0;
+        }
+            printf("1.Push\n");
+    printf("2.Pop\n");
+    printf("3.Show\n");
+    printf("4.Exit\n");
+    printf("Enter your choice\n");
+    scanf("%d",&n);
+    }
+    printf("Exiting....\n");
+}

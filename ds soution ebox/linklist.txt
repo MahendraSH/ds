@@ -1,0 +1,635 @@
+I LAB
+1)
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+    int data;
+    struct node * next;
+}Node;
+
+Node* insert_begin(Node* start)
+{
+    Node *new_node;
+    new_node=(Node*)malloc(sizeof(Node));
+    scanf("%d",&new_node->data);
+    if(start==NULL)
+    {
+        start=new_node;
+        new_node->next=NULL;
+    }
+    else
+    {
+        new_node->next=start;
+        start=new_node;
+    }
+    return start;
+}
+
+Node* insert_position(Node* start)
+{
+    int position,count=1;
+    scanf("%d",&position);
+    if(position==1)
+    {
+        start=insert_begin(start);
+        return start;
+    }
+    
+    Node *ptr=start;
+    while(ptr!=NULL)
+    {
+        count++;
+        ptr=ptr->next;
+    }
+    if(position>count)
+    {
+        printf("There are less than %d elements in the linked list\n",position);
+        return start;
+    }
+    Node *new_node,*preptr;
+    new_node=(Node*)malloc(sizeof(Node));
+    printf("Enter the element to be inserted\n");
+    scanf("%d",&new_node->data);
+    ptr=start;
+    for(int i=0;i<position-1;i++)
+    {
+        preptr=ptr;
+        ptr=ptr->next;
+    }
+    preptr->next=new_node;
+    new_node->next=ptr;
+    return start;
+}
+
+Node* delete_ele(Node* start)
+{
+    if(start==0)
+    {
+        printf("Linked list is empty\n");
+    }
+     Node *p ,*ptr;
+     int ele;
+     scanf("%d",&ele);
+     if(start==0)
+     {
+        //  printf("start is NULL\n");
+         return start;
+     }
+     p=start;
+     if(p->data==ele)
+     {
+         Node * s=start->next;
+         free(p);
+        //  printf("first \n");
+         return s;
+     }
+     int count=0;
+     while(p!=0)
+     {
+         count++;
+         if(ele == p->data)
+         {
+            //  printf("%d = count\n",count);
+             break;
+         }
+         p=p->next;
+     }
+     if(p==0  )
+     {
+         printf("%d is not present in the linked list\n",ele);
+        
+         return start;
+     }
+     ptr=start;
+     for(int i=0;i<count-1;i++)
+     {
+         ptr=ptr->next;
+     }
+     p=ptr->next;
+     ptr->next=ptr->next->next;
+     free(p);
+     return start;
+     
+}
+
+Node* search_update(Node* start)
+{
+    int ele;
+    scanf("%d",&ele);
+    // printf("Enter new value\n");
+    // scanf("%d",&val);
+    Node *ptr;
+    
+    ptr=start;
+    
+    while(ptr!=NULL)
+    {
+        if(ptr->data==ele)
+        {
+            printf("%d is present\n",ptr->data);
+            return start;
+        }
+        ptr=ptr->next;
+    }
+    printf("%d is not present in the linked list\n",ele);
+    
+    return start;
+}
+
+void display(Node* start)
+{
+    Node *ptr;
+    if(start==NULL)
+    {
+        printf("{}\n");
+        return;
+    }
+    ptr=start;
+    while(ptr!=NULL)
+    {
+        printf("%d ",ptr->data);
+        ptr=ptr->next;
+    }
+    printf("\n");
+}
+int main()
+{
+    int op;
+    Node* start=NULL;
+    printf("1 Add at Beginning\n2 Add at position\n3 Delete any node\n4 search and update\n5 Display\n6 Exit\n");
+    while(1)
+    {
+        printf("Enter your choice\n");
+        scanf("%d",&op);
+        if(op>0 && op<=6)
+        {
+            switch(op)
+            {
+                case 1: printf("Enter the element to be inserted\n");
+                        start=insert_begin(start);
+                        break;
+                case 2: printf("Enter the position at which you want to add another node\n");
+                        start=insert_position(start);
+                        break;
+                case 3: printf("Enter the element to be deleted\n");
+                        start=delete_ele(start);
+                        break;
+                case 4: printf("Enter the element to be searched\n");
+                        start=search_update(start);
+                        break;
+                case 5: printf("Elements in the List are ");
+                        display(start);
+                        break;
+                case 6: return 0;
+                
+                
+            }
+        }
+        else
+        {
+            printf("Enter a correct choice\nEnter your choice\n");
+            scanf("%d",&op);
+        }
+    }
+    
+    return 0;
+}
+-----------------------------------------------------
+2)
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+
+{
+
+int data;
+
+struct node * link;
+
+};
+void display(struct node * start)
+{
+    
+    while(start!=0)
+    {
+        printf("%d ",start->data);
+        start=start->link;
+    }
+    printf("\n");
+}
+void displayRe(struct node *start)
+{
+    if(start==0)
+    {
+        return ;
+    }
+    displayRe(start->link);
+    printf("%d ",start->data);
+}
+int main()
+{
+    struct node * start=0,*p;
+    char c[3]="Yes";    
+    start=0;
+        
+    while(c[0]=='Y' || c[0]=='y')
+    {
+        struct node * new_node=(struct node*)malloc(sizeof (struct node));
+        printf("Enter the value\n");
+        new_node->link=0;
+        scanf("%d",&new_node->data);
+        
+    if(start==0)
+    {
+        start=new_node;
+        // start->=0;
+    }
+    else 
+    {
+        p=start;
+        while(p->link!=0)
+        {
+            p=p->link;
+        }
+        p->link=new_node;
+         
+    }
+    printf("Do you want to add another node? Type Yes/No\n");
+        scanf("%s",c);
+    }
+    printf("The elements in the linked list are ");
+    display(start);
+    printf("\n");
+    printf("The elements in the reversed linked list are ");
+    displayRe(start);
+    printf("\n");
+}
+___________________________________________________________________________
+==========================================================================
+I PRATICE
+1)
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+    int data;
+    struct node * link;
+}Node;
+
+void append(Node** start,int val)
+{
+    Node *new_node,*ptr;
+    new_node=(Node*)malloc(sizeof(Node));
+    new_node->data=val;
+    new_node->link=NULL;
+    ptr=*start;
+    if(ptr==NULL)
+    {
+        *start=new_node;
+    }
+    else
+    {
+        while(ptr->link != NULL)
+            ptr=ptr->link;
+        ptr->link=new_node;
+    }
+    return;
+}
+
+void display(Node* start)
+{
+    Node* ptr=start;
+    while(ptr!=NULL)
+    {
+        printf("%d ",ptr->data);
+        ptr=ptr->link;
+    }
+}
+
+
+int main()
+{
+    int val;
+    Node* start=NULL;
+    char ch[3];
+    while(1)
+    {
+        printf("Enter the value\n");
+        scanf("%d",&val);
+        append(&start,val);
+        printf("Do you want to add another node? Type Yes/No\n");
+        scanf("%s",ch);
+        if(ch[0]=='N')
+            break;
+    }
+    printf("The elements in the linked list are ");
+    display(start);
+    return 0;
+}
+____________________________________________________________________________________________________
+2)#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+    
+};
+struct node *create(int n)
+{
+    int count=1;
+    struct node *p,*start=(struct node *)malloc(sizeof(struct node));
+    p=start;
+    while(count!=n)
+    {
+        start->next=(struct node*)malloc(sizeof(struct node));
+        start=start->next;
+        count++;
+    }
+    start->next=0;
+    return p;
+}
+void read(struct node *start)
+{
+    while(start!=0)
+    {
+        scanf("%d",&start->data);
+        start=start->next;
+    }
+    
+    
+    
+}
+struct node *combine(struct node* start1,struct node *start2)
+{
+    struct node * p=start1;
+    while(p->next!=0)
+    {
+     p=p->next;   
+    }
+    p->next=start2;
+    return start1;
+}
+void display(struct node *start)
+{
+    printf("Combined list:\n");
+    while(start!=0)
+    {
+        printf("%d\n",start->data);
+        start=start->next;
+    }
+}
+int main()
+{
+    struct node *start1 ,*start2;
+    int n;
+    printf("Number of elements in list 1:\n");
+    scanf("%d",&n);
+    start1=create(n);
+    printf("Enter the elements in list 1 :\n");
+    read(start1);
+    
+    int m;
+    printf("Number of elements in list 2 :\n");
+    
+    
+    
+    scanf("%d",&m);
+    start2=create(m);
+    printf("Enter the elements in list 2 :\n");
+    read(start2);
+     start1= combine(start1,start2);
+    display(start1);
+    // display(start2);
+}
+_______________________________________________________________________________
+3)#include<stdio.h>
+#include<stdlib.h>
+struct node 
+{
+    int data;
+    struct node* next ;
+};
+
+int main()
+
+{
+    struct node *start=0;
+    struct node *last=0;
+    int count=0;
+    printf("Enter the node's data (Press 0 to quit)\n");
+    while(1)
+    {
+        struct node *n= (struct node *) malloc(sizeof(struct node));
+        scanf("%d",&n->data);
+        n->next=0;
+        
+        if(n->data!=0)
+        {
+            if(start==0)
+            {
+            start=n;
+            last=start;
+            
+            }
+            else
+            {
+             last ->next=n;
+             
+             last =n;
+            }
+            count++;
+        }
+        else 
+{
+        n->next=start;
+        break;
+}
+    }
+    printf("List size : %d\n",count);
+}
+====================================================================================================================
+I APPLY
+1)
+#include<stdio.h>
+#include<stdlib.h>
+struct node 
+{
+    int data;
+    struct node *next;
+
+};
+void append ( struct node **start , int ) ;
+void display ( struct node * ) ;
+
+int main()
+{
+    int n;
+    struct node *start=0;
+     printf("1.Enter the new batch\n2.View batches\n3.Exit\n");
+            printf("Enter your choice\n");
+            scanf("%d",&n);
+    while (1)
+    {
+        if(n==1)
+
+        {
+            int val ;
+            printf("Enter the batch number\n");
+            scanf("%d",&val);
+         append(&start,val);
+            
+        }
+        else if(n==2)
+        {
+            display(start);
+
+        }
+        else if(n==3)
+    {
+        printf("Exit\n");
+        return 0;
+    }
+    else{
+        printf("Enter a valid choice\n");
+
+    }
+        
+            printf("1.Enter the new batch\n2.View batches\n3.Exit\n");
+            printf("Enter your choice\n");
+            scanf("%d",&n);
+        
+    }
+    
+    
+}
+
+void append(struct node ** start,int val)
+{
+    struct node  *new_node,*ptr;
+    new_node=(struct node*)malloc(sizeof(struct node));
+    new_node->data=val;
+    new_node->next=NULL;
+    ptr=*start;
+    if(ptr==NULL)
+    {
+        *start=new_node;
+    }
+    else
+    {
+        while(ptr->next != NULL)
+            ptr=ptr->next;
+        ptr->next=new_node;
+    }
+    return;
+}
+
+void display(struct node * start)
+{
+    if(start==0)
+    {
+        printf("No batches were given\n");
+        return ;
+    }
+    printf("Batch numbers are:\n");
+    struct node * ptr=start;
+    while(ptr!=NULL)
+    {
+        printf("%d ",ptr->data);
+        ptr=ptr->next;
+    }
+    printf("\n");
+}
+--------------------------------------------------------------------------------------------------------
+2)
+#include<stdio.h>
+#include<stdlib.h>
+struct node 
+{
+    int data;
+    struct node *next;
+
+};
+// void addatbeg(struct stone**head, int v);
+void addatbeg ( struct node** , int ) ;
+void display ( struct node * ) ;
+
+int main()
+{
+    int n;
+    struct node *start=0;
+     printf("1.Add a stone\n2.View stones\n3.Exit\n");
+            printf("Enter your choice\n");
+            scanf("%d",&n);
+    while (1)
+    {
+        if(n==1)
+
+        {
+            int val ;
+            printf("Enter the stone\n");
+            scanf("%d",&val);
+         addatbeg(&start,val);
+            
+        }
+        else if(n==2)
+        {
+            display(start);
+
+        }
+        else if(n==3)
+    {
+        printf("Exit\n");
+        return 0;
+    }
+    else{
+        printf("Enter a valid choice\n");
+
+    }
+         printf("1.Add a stone\n2.View stones\n3.Exit\n");
+    
+            printf("Enter your choice\n");
+            scanf("%d",&n);
+        
+    }
+    
+    
+}
+
+void addatbeg(struct node**  start,int val)
+{
+    struct node  *new_node;
+    new_node=(struct node*)malloc(sizeof(struct node));
+    new_node->data=val;
+    new_node->next=NULL;
+    // ptr=*start;
+    if(start==0)
+    {
+        *start=new_node;
+        return ;
+    }
+    new_node->next=*start;
+    *start=new_node;
+
+
+    
+    return;
+}
+
+void display(struct node * start)
+{
+    if(start==0)
+    {
+        printf("No stones were added\n");
+        return ;
+    }
+    printf("Stones are:\n");
+    struct node * ptr=start;
+    while(ptr!=NULL)
+    {
+        printf("%d ",ptr->data);
+        ptr=ptr->next;
+    }
+    printf("\n");
+}

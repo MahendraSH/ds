@@ -1,0 +1,217 @@
+Searching and Sorting - i-Lab
+1)
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+    
+    int n;
+    printf("Enter the size of the array :\n");
+    scanf("%d",&n);
+    int b[10][n];
+    int count[n];
+    int a[n];
+    printf("Enter the array elements :\n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    int largest=0;
+    for(int i=0;i<n;i++ )
+    {
+        if(largest<a[i])
+        largest=a[i];
+    }
+    int dcount=0;
+    while(largest>0)
+    {
+        largest/=10;
+        dcount++;
+    }
+    int d=1;
+    for(int k=0;k<dcount;k++)
+    {
+        for(int i=0;i<10;i++)
+        {
+            count[i]=-1;
+        }
+        for(int i=0;i<n;i++)
+        {
+            count[(a[i]/d)%10]++;
+            b[(a[i]/d)%10][ count[(a[i]/d)%10]]=a[i];
+        }
+    
+    int c=0;
+    for(int i=0;i<10;i++)
+    {
+        for(int j=0;j<=count[i];j++)
+        {
+            
+            a[c]=b[i][j];
+            c++;
+        }
+    }
+    d*=10;
+    }
+    printf("Array after sorting :\n");
+    for(int i=0;i<n;i++)
+    {
+        printf("%d ",a[i]);
+    }
+}
+==================================================================================================
+2)
+#include<stdio.h>
+void sort(int *a,int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n-i;j++)
+        {
+            if(a[j]<a[j+1])
+            {
+                int temp=a[j];
+                a[j]=a[j+1];
+                a[j+1]=temp;
+            }
+        }
+    }
+}
+int search(int *a,int n,int target)
+{
+    int start=0;
+    int end=n-1;
+    while(start<=end)
+    {
+        int mid=start+(end-start)*(target-a[start])/(a[end]-a[start]);
+        if(a[mid]==target)
+        {
+            return mid;
+        }
+        else if(a[mid]<target)
+        {
+            end=mid-1;
+        }
+        else
+        {
+            start=mid+1;
+        }
+    }
+    return -1;
+}
+int main()
+{
+    int n;
+    printf("Enter the number of elements in the array :\n");
+    scanf("%d",&n);
+    int a[n];
+    printf("Enter the elements :\n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    int target;
+    printf("Enter the value to be searched :\n");
+    scanf("%d",&target);
+    sort(a,n);
+    int ans=search(a,n,target);
+    if(ans==-1)
+    {
+        printf("%d is not found in the array\n",target);
+    }
+    else
+    printf("%d is found at position %d\n",target,ans+1);
+    return 0;
+}
+==============================================================================
+Searching and sorting -- i- Practice
+1)
+#include<stdio.h>
+#include<stdlib.h>
+struct tnode
+{
+    int data;
+    struct tnode *left;
+    struct tnode *right;
+    
+};
+struct tnode*tree=0;
+void insert()
+{
+    struct tnode* n = (struct tnode *)malloc(sizeof(struct tnode));
+    printf("Enter the element to insert :\n");
+    n->left=n->right=0;
+    scanf("%d",&n->data);
+    // printf("%d is inserted at the right");
+    struct tnode *p=tree;
+    while(p!=0)
+    {
+        if(p->data>n->data)
+        {
+            if(p->left==0)
+            {
+                p->left=n;
+                printf("%d is inserted at the left",n->data);
+                return;
+            }
+            p=p->left;
+        }
+        else
+        {
+            if(p->right==0)
+            {
+                p->right=n;
+                printf("%d is inserted at the right",n->data);
+                return;
+            }
+            p=p->right;
+        }
+    }
+    return;
+}
+void diplay(struct tnode *s)
+{
+    if(s==0)
+    {
+     return;
+    }
+    diplay(s->left);
+    printf("%d ",s->data);
+    diplay(s->right);
+}
+int main()
+{
+    int n;
+	
+	printf("Enter a number for parent node :\n");
+
+	tree =(struct tnode*)malloc(sizeof(struct tnode));
+	tree->left=tree->right=0;
+	scanf("%d",&tree->data);
+// 	insert(ele);
+	printf("1.Add element\n");
+	printf("2.Sort\n");
+	printf("3.Exit\n");
+	printf("Enter your choice :\n");
+	scanf("%d",&n);
+	while(n==1 || n==2)
+	{
+	    if(n==1)
+	    {
+	        insert();
+	    }
+	    else
+	    {
+	        printf("Sorted elements are :\n");
+	        diplay(tree);
+	        printf("\n");
+	    }
+	    	printf("1.Add element\n");
+	printf("2.Sort\n");
+	printf("3.Exit\n");
+	printf("Enter your choice :\n");
+	scanf("%d",&n);
+	}
+	printf("Invalid press...\n");
+	return 0;
+}

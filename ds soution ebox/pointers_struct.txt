@@ -1,0 +1,948 @@
+I LAB
+1)
+#include<stdio.h>
+
+int maximum (int *a,int *b, int *c) 
+{
+    if(*a>=*b && *a>=*c)
+    {
+        return *a;
+    }
+    if(*b>=*a &&  *b>=*c)
+    return *b;
+    return *c ;
+}
+int main()
+{
+    int a,b,c;
+    printf("Enter the value of a \n");
+    scanf("%d",&a);
+    printf("Enter the value of b \n");
+    scanf("%d",&b);
+    printf("Enter the value of c \n");
+    scanf("%d",&c);
+    int ans=maximum(&a,&b,&c);
+    printf("Maximum element is %d",ans);
+    return 0;
+}_________________________________________________________________________________
+2)
+#include<stdio.h>
+int search(int *a,int n,int target)
+{
+    for(int i=0;i<n;i++)
+    {
+        if(a[i]==target)
+        return i+1;
+    }
+    return -1;
+}
+int main()
+{
+    int n;
+    printf("Enter the size \n");
+    scanf("%d",&n);
+    int arr[n];
+    printf("Enter the elements \n");
+    for(int i=0;i<n;i++)
+    {
+         scanf("%d",&arr[i]);
+    }
+    printf("The elements are\n");
+    for(int i=0;i<n;i++)
+    {
+        printf("%d\n",arr[i]);
+        
+    }
+    int target;
+    printf("Enter the key element\n");
+    scanf("%d",&target);
+    int ans=search(arr,n,target);
+    if(ans==-1)
+    {
+        printf("Element not found\n");
+    }
+    else
+    {
+        printf("Element is found at %d",ans);
+    }
+}
+_____________________________________________________________________________________
+3)
+#include<stdio.h>
+#include<stdlib.h>
+void max(int*arr,int row,int col)
+{
+    for(int i=0;i<row;i++)
+    {
+        int max=-19999;
+        for(int j=0;j<col;j++)
+        {
+            if(max<*(arr+j+i*col))
+            {
+                max=*(arr+j+i*col);
+            }
+        }
+        if(max!=0)
+        {
+            printf("%d\n",max);
+        }
+  }
+    
+}
+int main()
+{
+    int row,col;
+    printf("Enter the number of rows in the matrix\n");
+    scanf("%d",&row);
+    printf("Enter the number of columns in the matrix\n");
+    scanf("%d",&col);
+    int *arr=(int*)malloc(row*col*sizeof(int));
+    printf("Enter the elements in the matrix\n");
+    for(int i=0;i<row;i++)
+    {
+        for(int j=0;j<col;j++)
+        {
+            scanf("%d",arr+j+i*col);
+        }
+        
+    }
+    max(arr,row,col);
+}______________________________________________________________________
+4)
+#include<stdio.h>
+#include<stdlib.h>
+
+struct TIME
+{
+    int minute;
+    int seconds;
+    int hour;
+    struct TIME *next;
+};
+    void display(struct TIME * ptr)
+    {
+        while(ptr!=0)
+        {
+        printf("%d:%d:%d\n",ptr->hour,ptr->minute,ptr->seconds);
+        ptr=ptr->next;
+        }
+    }
+
+int main()
+{
+    struct TIME  *t1=(struct TIME*) malloc(sizeof(struct TIME));
+    struct TIME  *t2=(struct TIME*) malloc(sizeof(struct TIME));
+    t1->next=t2;
+    t2->next=0;
+    printf("Enter the number \n");
+    struct TIME *ptr=t1;
+    int i=1;
+     while(ptr!=0)
+        {
+            printf("Time %d",i);
+        scanf("%d%d%d",&ptr->hour,&ptr->minute,&ptr->seconds);
+        ptr=ptr->next;
+        i++;
+        }
+        display(t1);
+    free(t1->next);
+    free(t1);
+    
+}
+----------------------------------------------------------------
+5)
+#include<stdio.h>
+#include<stdlib.h>
+struct Student
+{
+    char name[20];
+    int usn;
+    int marks[3];
+    int total;
+    
+};
+int main()
+{
+    int n;
+    printf("Enter total number of students\n");
+    scanf("%d",&n);
+    struct Student ** s=(struct Student**)malloc(n*sizeof(struct Student*));
+    
+    for(int i=0;i<n;i++)
+    {
+        s[i]=(struct Student*)malloc(sizeof(struct Student));
+        printf("Enter details of student %d\n",i+1);
+        scanf("%s",s[i]->name);
+        scanf("%d",&s[i]->usn);
+        
+        for(int j=0;j<3;j++)
+        {
+        scanf("%d",&s[i]->marks[j]);
+        s[i]->total+=s[i]->marks[j];
+        }
+    }
+    for(int i=0;i<n;i++)
+    {
+        for(int j=i+1;j<n;j++)
+        {
+            if(s[i]->total <s[j]->total)
+            {
+                struct Student *temp=s[i];
+                s[i]=s[j];
+                s[j]=temp;
+                
+            }
+        }
+        
+    }
+        printf("Displaying Information\n");
+    for(int i=0;i<n;i++)
+    {
+       printf("%s ",s[i]->name);
+       printf("%d ",s[i]->usn );
+       for(int j=0;j<3;j++)
+       {
+           printf("%d ",s[i]->marks[j]);
+       }    printf("\n");
+    }
+    // printf("\n");
+    return 0;
+}
+_______________________________________________________________________________________________
+==================================================================================================
+I PRACTICE
+1)
+#include<stdio.h>
+void addition(int *a,int *b)
+{
+       printf("Sum of two elements = %d",*a+*b);
+       return ;
+}
+int main()
+{
+    int a,b;
+    printf("Enter the value of a\n");
+    scanf("%d",&a);
+    printf("Enter the value of b\n");
+        scanf("%d",&b);
+     addition(&a,&b);
+     return 0;
+}
+____________________________________________________________________________________________________
+2)
+#include<stdio.h>
+void oddoreven (int *a) 
+{
+    if(*a%2==0)
+    {
+        printf("%d is an even number\n",*a);
+    }
+    else
+    {
+                printf("%d is an odd number\n",*a);
+    }
+    return ;
+}
+int main()
+{
+    int a;
+    printf("Enter the number\n");
+    scanf("%d",&a);
+    
+    oddoreven(&a);
+    return 0;
+}
+_________________________________________________________________________________________________
+3)
+#include<stdio.h>
+#include<stdlib.h>
+int Maximum(int *a,int n)
+{
+    int max=-294902;
+    for(int i=0;i<n;i++)
+    {
+        if(max<*(a+i))
+        max=*(a+i);
+    }
+    return max;
+}
+int main()
+{
+    int n;
+    printf("Enter the number of elements in an array\n");
+    scanf("%d",&n);
+    int *arr=(int *)malloc(sizeof(int )*n);
+    printf("Enter the array elements\n");
+    
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",arr+i);
+        
+    }
+    
+    printf("%d is the maximum element in the array\n",Maximum(arr,n));
+}
+____________________________________________________________________________
+4)#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+ int row ,col;
+ printf("Enter the number of rows in the matrix \n");
+ scanf("%d",&row);
+ printf("Enter the number of columns in the matrix\n");
+ scanf("%d",&col);
+ printf("Enter the elements in the matrix\n");
+ int *arr=(int *)malloc(row*col*sizeof(int));
+ for(int i=0;i<row;i++)
+ {
+     for(int j=0;j<col;j++)
+     {
+         scanf("%d",arr+i*col+j);
+     }
+ }
+ int sum=0;
+ for(int i=0;i<row;i++)
+ {
+     for(int j=0;j<col;j++)
+     {
+         sum+=*(arr+i*col+j);
+     }
+ }
+ printf("The sum of the elements in the matrix is %d\n",sum);
+ return 0;
+}
+_______________________________________________________________________
+5)
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+    int n;
+    printf("Enter order of matrix\n");
+    scanf("%d",&n);
+    printf("Enter matrix values\n");
+    int *arr=(int *)malloc(sizeof(int)*n*n);
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            scanf("%d",arr+i*n+j);
+        }
+    }
+    printf("The given matrix is");
+     for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            printf("%d",*(arr+i*n+j));
+        }
+        printf("\n");
+    }
+    printf("Transpose matrix is\n");
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            printf("%d",*(arr+j*n+i));
+        }
+        printf("\n");
+    }
+}
+___________________________________________________________________________________
+===================================================================================
+I APPLY
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+    int n;
+    printf("Enter the number of students in the class\n");
+    scanf("%d",&n);
+    printf("Enter the marks of the students\n");
+    int *arr=(int *)malloc(sizeof(int)*n);
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",arr+i);
+    }
+    int fail=0;
+    int pass=0;
+    
+    for(int i=0;i<n;i++)
+    {
+        if(*(arr+i)>50)
+        pass++;
+        else if(*(arr+i)!=-1&& *(arr+i)<50 )
+        fail++;
+    }
+    printf("Number of passed students is %d and the number of failed students is %d",pass,fail);
+    return 0;
+    
+}
+_______________________________________________________________________________________________________
+2)
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+    int n;
+    printf("Enter the number of students in the class\n");
+    scanf("%d",&n);
+    int *arr=(int *)malloc(sizeof(int )*n);
+    printf("Enter the marks of the students \n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",arr+i);
+    }
+    int i=0;
+    for(i=0;i<n;i++)
+    {
+        if(*(arr+i)==0)
+        {
+              printf("Has  scored a zero\n"); 
+              break;
+        }
+    }
+        // printf("Has  scored a zero\n");
+        if(i==n)
+    printf("Has not scored a zero\n");
+    return 0;
+}
+____________________________________________________________________________
+3)
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+    int n;
+    printf("Enter the number of students in the class\n");
+    scanf("%d",&n);
+    int *arr=(int *)malloc(sizeof(int)*n);
+    printf("Enter the marks of the students \n");
+    int sum=0;
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",arr+i);
+        sum+=*(arr+i);
+    }
+    float avg=(float)(sum/(n*1.0));
+    printf("The class average score is %.2f",avg);
+    
+}
+_____________________________________________________________________
+4)#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+    int n;
+    printf("Enter the number of elements in an array\n");
+    scanf("%d",&n);
+    int *arr=(int *)malloc(sizeof(int)*n);
+    printf("Enter the array elements \n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",arr+i);
+    }
+    printf("Leaders are\n");
+   for(int i=0;i<n;i++)
+   {
+       
+       int max=-242420;
+       for(int j=i;j<n;j++)
+       {
+           if(max<*(arr+j))
+           {
+           max=*(arr+j);
+           }
+       }
+    //   printf("%d\n",max);
+       if(max==*(arr+i))
+       {
+          printf("%d",*(arr+i));
+       }
+   }
+}
+__________________________________________________________________
+5)#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int *a;
+    int total;
+    int i;
+};
+int main()
+{
+    int ladertop=0,laderdown=0,snaketop=0,snakedown=0;
+    struct node a={0};
+    struct node b={0};
+    scanf("%d %d",&laderdown,&ladertop);
+    scanf("%d %d",&snaketop,&snakedown);
+    int n;
+    scanf("%d",&n);
+    a.a=(int*)malloc(sizeof(int)*n);
+    int count=0;
+    for(int i=0;i<n;i++)
+    {
+    scanf("%d",&a.a[i]);
+    if(a.a[i]==1)
+    {
+        count++;
+    }
+    if(a.total >100)
+        {
+            printf("100\n %d \n",b.total);
+            return 0;
+        }
+    if(a.a[i]!=1 && count==0)
+    {
+        a.a[i]=0;
+    }
+    
+    count =0;
+    b.a=(int*)malloc(sizeof(int)*n);
+    for(int i=0;i<n;i++)
+    {
+        
+        scanf("%d",&b.a[i]);
+        if(b.a[i]==1)
+        {
+            count++;
+        }
+        if(b.a[i]!=1 &&count==0 )
+        {
+            b.a[i]=0;
+        }
+    }
+    for(int i=0;i<n;i++)
+    {
+        //     if(b.total >100)
+        // {
+        //     printf("%d \n 100\n",a.total+1);
+        //     return 0;
+        // }
+        // if(a.total >100)
+        // {
+        //     printf("100\n %d \n",b.total+3);
+        //     return 0;
+        // }
+        a.total+=a.a[i];
+        // b.total+=b.a[i];
+        if(a.total==laderdown)
+        {
+            a.total=ladertop;
+        }
+        if(a.total==snaketop)
+        {
+            a.total=snakedown;
+        }
+        
+        b.total+=b.a[i];
+        // b.total+=b.a[i];
+        if(b.total==laderdown)
+        {
+            b.total=ladertop;
+        }
+        if(b.total==snaketop)
+        {
+            b.total=snakedown;
+        }
+        
+    }
+    if(a.total >100)
+    {
+        printf("100 \n %d ",b.total);
+    }
+   else if(b.total>100)
+    {
+        printf("%d \n 100 ",a.total);
+    }
+    else
+     printf("%d \n %d ",a.total,b.total);
+}
+___________________________________________________________________________________
+6)
+#include<stdio.h>
+int main()
+{
+    int n;
+    scanf("%d",&n);
+    int arr[n][n];
+    int brr[n][n];
+    int ansA,ansB;
+    scanf("%d",&ansA);
+    
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+       scanf("%d",&arr[i][j]);
+    }
+    scanf("%d",&ansB);
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+       scanf("%d",&brr[i][j]);
+    }
+    int count=0;
+    int ans=0;
+    for(int i=0;i<n;i++)
+    {
+        int a=arr[ansA-1][i];
+      for(int j=0;j<n;j++)
+      {
+          if(a==brr[ansB-1][j])
+          {
+              count++;
+              ans=a;
+          }
+      }
+      
+    }
+    if(count ==1)
+    {
+        printf("%d",ans);
+    }
+    else if(count ==0)
+    {
+        printf("cheat\n");
+            // printf("%d",ans);
+    }
+    else 
+    {
+        printf("bad");
+    }
+}
+_____________________________________________________________
+7)
+#include<stdio.h>
+int main()
+{
+    int n;
+    printf("Enter the size of the chess board\n");
+    scanf("%d",&n);
+    int arr[n][n];
+    for(int i=0;i<n;i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            arr[i][j]=0;
+        }
+        
+    }
+    int bisx ,bisy ,queenx,queeny;
+    printf("Enter x coordinate of bishop\n");
+    scanf("%d",&bisx);
+printf("Enter y coordinate of bishop\n");
+scanf("%d",&bisy);
+printf("Enter x coordinate of queen\n");
+scanf("%d",&queenx);
+printf("Enter y coordinate of queen\n");
+scanf("%d",&queeny);
+bisx--;
+bisy--;
+queenx--;
+queeny--;
+arr[queenx][queeny]=2;
+arr[bisx][bisy]++;
+// hor queen
+for(int i=0;i<n;i++)
+{
+    if(i!=queeny)
+    {
+        
+  arr[queenx][i]++;
+  arr[queenx][i]++;
+    }
+}
+// ver queen 
+for(int i=0;i<n;i++)
+{
+    if(i!=queenx)
+    {
+        
+  arr[i][queeny]++;
+  arr[i][queeny]++;
+    }
+}
+// / one ++ ++
+
+for(int i=queenx+1,j=queeny+1;i<n&& j<n;i++,j++)
+{
+    arr[i][j]++;
+    arr[i][j]++;
+}
+// two -- --;
+for(int i=queenx-1,j=queeny-1;i>=0&& j>=0;i--,j--)
+{
+    arr[i][j]++;
+    arr[i][j]++;
+}
+
+//  three ++ --;
+for(int i=queenx+1,j=queeny-1;i<n&&j>=0;i++,j--)
+{
+    arr[i][j]++;
+    arr[i][j]++;
+}
+//  four -- ++
+for(int i=queenx-1,j=queeny+1;i>=0&&j<n;i--,j++)
+{
+    arr[i][j]++;
+    arr[i][j]++;
+}
+
+// bis
+// / one ++ ++
+
+for(int i=bisx+1,j=bisy+1;i<n&& j<n;i++,j++)
+{
+    arr[i][j]++;
+}
+// two -- --;
+for(int i=bisx-1,j=bisy-1;i>=0&& j>=0;i--,j--)
+{
+    arr[i][j]++;
+}
+
+//  three ++ --;
+for(int i=bisx+1,j=bisy-1;i<n&&j>=0;i++,j--)
+{
+    arr[i][j]++;
+}
+//  four -- ++
+for(int i=bisx-1,j=bisy+1;i>=0&&j<n;i--,j++)
+{
+    arr[i][j]++;
+}
+for(int i=0;i<n;i++)
+{
+    for(int j=0;j<n;j++)
+    {
+        if(i==queenx && j==queeny)
+        {
+            printf("Q ");
+        }
+        else if(i==bisx && j==bisy)
+        {
+            printf("B ");
+        }
+        else if(arr[i][j]==0)
+        {
+            printf(". ");
+        }
+       else  if(arr[i][j]==3)
+        {
+            printf("%% ");
+        }
+        else if(arr[i][j]==2)
+        {
+            printf("$ ");
+        }
+        else
+        {
+            printf("* ");
+        }
+
+    }
+    printf("\n");
+}
+}
+______________________________________________________________
+8)
+#include<stdio.h>
+#include<stdlib.h>
+int cheeckrow(int ** a ,int n)
+{
+    int z=(n*(n+1))/2;
+//     int *arr=(int *)malloc (sizeof(int)*n);
+// for(int i=0;i<n;i++)
+// {
+//   *(arr+i)=i+1;
+// }
+     for(int i=0;i<n;i++)
+     {
+         int count =0;
+         int sum=0;
+         for(int j=0;j<n;j++)
+         {
+             
+            for(int k=0;k<n;k++)
+            {
+              if(*(*(a+i)+j)==k+1)
+              {
+                  sum+=*(*(a+i)+j);
+                  count++;
+              }
+            }
+         }
+         if(count!=n || sum!=z)
+         {
+             return 0;
+         }
+     }
+     return 1;
+
+}
+int cheeckcol(int **a ,int n)
+{
+        int z=(n*(n+1))/2;
+ for(int i=0;i<n;i++)
+     {
+         int count =0;
+         int sum=0;
+         for(int j=0;j<n;j++)
+         {
+             
+            for(int k=0;k<n;k++)
+            {
+              if(*(*(a+j)+i)==k+1)
+              {
+                  sum+=*(*(a+j)+i);
+                  count++;
+              }
+            }
+         }
+         if(count!=n || sum!=z )
+         {
+             return 0;
+         }
+     }
+     return 1;
+}
+int cheacksmall(int **a,int n)
+{
+    int m=n*n;
+    int z=(m*(m+1))/2;
+    
+for(int i=0;i<n;i++)
+{
+for(int j=0;j<n;j++)
+{
+    int count =0;
+    int sum=0;
+    for(int b=(0+i*n);b<(n+i*n);b++)
+    {
+      for(int c=(0+j*n);c<(n+j*n);c++)
+      {
+        //   printf("%d ",*(*(a+b)+c));
+          for(int k=0;k<n*n;k++)
+          {
+          if(*(*(a+b)+c)==k+1)
+          {
+              sum+= *(*(a+b)+c);
+             count++;
+          }
+          }
+      }
+    //   printf("\n");
+    }
+    // printf("\n");
+    if(count!=n*n  ||sum!=z)
+    {
+        return 0;
+    }
+}
+    
+}
+return 1;
+}
+int sqare(int n)
+{
+    if(n==4)
+    {
+        return 2;
+    }
+    if(n==9)
+    {
+        return 3;
+    }
+    if(n==16)
+    {
+        return 4;
+    }
+if(n==25)
+
+{
+    return 5;
+}
+if(n==36)
+{
+    return 6;
+}
+if(n==49)
+{
+return 7;
+}
+if(n==64)
+{
+    return 8;
+}
+if(n==81)
+{
+    return 9;
+}
+return 10;
+}
+int main()
+{
+    int n;
+printf("Enter N\n");
+scanf("%d",&n);
+if(n==1)
+{
+    printf("Enter a completed Sudoko solution\n");
+    int x;
+    scanf("%d",&x);
+    if(x==1)
+    {
+        printf("yes");
+    }
+    else
+    {
+        printf("no");
+    }
+    return 0;
+}
+printf("Enter a completed Sudoko solution\n");
+int **a=(int**)  malloc(n*sizeof(int*));
+for(int i=0;i<n;i++)
+{
+  *(a+i)=(int *)malloc(sizeof(int)*n);
+}
+for(int i=0;i<n;i++)
+{
+for(int j=0;j<n;j++)
+{
+scanf("%d",*(a+i)+j);
+}
+}
+// int *arr=(int *)malloc (sizeof(int)*n);
+// for(int i=0;i<n;i++)
+// {
+//   *(arr+i)=i+1;
+// }
+if(!cheeckrow(a,n))
+{
+printf("no  ");
+return 0;
+}
+if(!cheeckcol(a,n))
+{
+    printf("no  ");
+    return 0;
+}
+// int m=sqare(n);
+
+if(!cheacksmall(a,sqare(n)))
+{
+     printf("no ");
+    return 0;
+}
+printf("yes");
+return 0;
+
+    
+}
+
+_________________________________________________________
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

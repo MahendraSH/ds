@@ -1,0 +1,560 @@
+I lab
+1)
+#include<stdio.h>
+#include<stdlib.h>
+struct  tnode
+{
+    int data;
+    struct tnode *left;
+    struct tnode *right;
+};
+struct tnode* tree=0;
+void insert(int ele)
+{
+    struct tnode *n=(struct tnode*)malloc(sizeof(struct tnode));
+    n->left=n->right=0;
+    n->data=ele;
+    if(tree==0)
+    {
+        tree=n;
+        return ;
+    }
+    struct tnode *t=tree;
+    
+        while(t!=0)
+        {
+            
+             if(t->data>n->data)
+            {
+                if(t->left==0)
+                {
+                    t->left=n;
+                    return;
+                }
+                else
+                {
+                    t=t->left;
+                    // return;
+                }
+            }
+            else
+            {
+                if(t->right==0)
+                {
+                    t->right=n;
+                    return;
+                }
+                else 
+                {
+                    t=t->right;
+                }
+            }
+        }
+    
+    return;
+    
+}
+
+void disPLAY(struct tnode *start)
+{
+    if(start==0)
+    {
+        return;
+    }
+    disPLAY(start->left);
+    printf("%d ",start->data);
+    disPLAY(start->right);
+    return;
+}
+
+void preorder(struct tnode *s)
+{
+    if(s==0)
+    {
+        return;
+    }
+    printf("%d ",s->data);
+    preorder(s->left);
+    preorder(s->right);
+}
+void postorder(struct tnode *s)
+{
+    if(s==0)
+    {
+        return;
+    }
+    postorder(s->left);
+    postorder(s->right);
+    printf("%d ",s->data);
+    
+}
+
+int main()
+{
+    int ele;
+    char c[3];
+    printf("Enter the element to be inserted in the tree\n");
+    // tree=(struct tnode *)malloc(sizeof(struct tnode));
+    // tree->left=tree->right=0;
+    // tree->data=ele;
+    scanf("%d",&ele);
+    insert(ele);
+    printf("Do you want to insert another element?");
+    scanf("%s",c);
+    if(c[0]=='\n')
+    {
+     scanf("%s",c);   
+    }
+    
+    while(c[0]=='y')
+    {
+        printf("Enter the element to be inserted in the tree\n");
+    scanf("%d",&ele);
+    insert(ele);
+    printf("Do you want to insert another element?");
+    scanf("%s",c);
+    if(c[0]=='\n')
+    {
+     scanf("%s",c);   
+    }
+        
+    }
+    printf("Inorder Traversal : The elements in the tree are ");
+    disPLAY(tree);
+    printf("\n");
+    
+    printf("Preorder Traversal : The elements in the tree are ");
+    preorder(tree);
+    printf("\n");
+    
+    printf("Postorder Traversal : The elements in the tree are ");
+    postorder(tree);
+    printf("\n");
+      return 0;
+}
+
+-----------------------------------------------------------------------------------------
+2)
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct  node* next;
+};
+struct node *start=0;
+void insert_Node(int ele)
+{
+    struct node*n=(struct node*)malloc(sizeof(struct node));
+    n->data=ele;
+    n->next=0;
+    if(start==0)
+    {
+        start=n;
+        return;
+    }struct node *p=start;
+    while(p->next!=0)
+    {
+        p=p->next;
+    }
+    p->next=n;
+    return ;
+}
+struct  tnode
+{
+    int data;
+    struct tnode *left;
+    struct tnode *right;
+};
+struct tnode* tree=0;
+void path_ele(struct tnode* s)
+{
+    if(s==0)
+    {
+        return;
+    }
+    else if(s->left==0 && s->right==0)
+    {
+        insert_Node(s->data);
+        return;
+    }
+    path_ele(s->left);
+    path_ele(s->right);
+}
+void print_path(struct tnode * s,int ele)
+{
+   if(s==0)
+   {
+       return;
+   }
+   else 
+   {
+       printf("%d ",s->data);
+       if(s->data==ele)
+       return;
+   }
+    if(s->data>ele)
+   {
+      print_path(s->left,ele);
+   }
+   else
+   {
+       print_path(s->right,ele);
+   }
+   return;
+}
+void insert(int ele)
+{
+    struct tnode *n=(struct tnode*)malloc(sizeof(struct tnode));
+    n->left=n->right=0;
+    n->data=ele;
+    if(tree==0)
+    {
+        tree=n;
+        return ;
+    }
+    struct tnode *t=tree;
+    
+        while(t!=0)
+        {
+            
+             if(t->data>n->data)
+            {
+                if(t->left==0)
+                {
+                    t->left=n;
+                    return;
+                }
+                else
+                {
+                    t=t->left;
+                    // return;
+                }
+            }
+            else
+            {
+                if(t->right==0)
+                {
+                    t->right=n;
+                    return;
+                }
+                else 
+                {
+                    t=t->right;
+                }
+            }
+        }
+    
+    return;
+    
+}
+
+void disPLAY(struct tnode *start)
+{
+    if(start==0)
+    {
+        return;
+    }
+    disPLAY(start->left);
+    printf("%d ",start->data);
+    disPLAY(start->right);
+    return;
+}
+
+
+int main()
+{
+    int ele;
+    char c[3];
+    printf("Enter the element to be inserted in the tree\n");
+    // tree=(struct tnode *)malloc(sizeof(struct tnode));
+    // tree->left=tree->right=0;
+    // tree->data=ele;
+    scanf("%d",&ele);
+    insert(ele);
+    printf("Do you want to insert another element?");
+    scanf("%s",c);
+    if(c[0]=='\n')
+    {
+     scanf("%s",c);   
+    }
+    
+    while(c[0]=='y')
+    {
+        printf("Enter the element to be inserted in the tree\n");
+    scanf("%d",&ele);
+    insert(ele);
+    printf("Do you want to insert another element?");
+    scanf("%s",c);
+    if(c[0]=='\n')
+    {
+     scanf("%s",c);   
+    }
+        
+    }
+    printf("The elements in the tree are ");
+    disPLAY(tree);
+    printf("\n");
+    
+    printf("The root to leaf paths in the tree are\n");
+    path_ele(tree);
+    for(struct node *p=start;p!=0;p=p->next)
+    {
+        // printf("l=%d \n",p->data);
+    
+        print_path(tree,p->data);
+        printf("\n");
+    }
+      return 0;
+}
+
+==================================================================================================
+BST -- i- Practic
+1)
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+struct tnode {
+	int data;
+	struct tnode * leftc;
+	struct tnode * rightc;
+};
+
+void insert(struct tnode **, int num);
+void inorder(struct tnode *);
+int findMaxDepth(struct tnode * s);
+
+int main() {
+	struct tnode * root=NULL;
+	char ch[5];
+	int num;
+	do {
+		printf("Enter the element to be inserted in the tree\n");
+		scanf("%d",&num);
+		insert(&root, num);
+		printf("Do you want to insert another element?\n");
+		scanf("%s",ch);
+	}while(strcmp(ch,"yes")==0);
+
+	printf("The elements in the tree are");
+	inorder(root);
+	printf("\n");
+	printf("The maximum depth of the tree is %d\n",findMaxDepth(root));
+	return 0;
+}
+
+void insert(struct tnode ** s, int num) {
+	if((*s) == NULL) {
+		(*s) = (struct tnode *) malloc( sizeof (struct tnode));
+		(*s)->data = num;
+		(*s)->leftc = NULL;
+		(*s)->rightc = NULL;
+	}
+	else 	{
+		if(num < (*s)->data)
+		  insert(&( (*s)->leftc ), num);
+		else
+		  insert(&( (*s)->rightc ), num);
+	}
+}
+
+void inorder(struct tnode * s) {
+    /*----------Fill your code here-----------*/
+    if(s==0)
+    {
+        return ;
+    }
+    else {
+         inorder(s->leftc);
+         printf("%d ",s->data);
+         inorder(s->rightc);
+    }
+}
+
+int findMaxDepth(struct tnode * s) {
+       int r ;
+       int l;
+       if(s==0)
+       {
+           return 0;
+       }
+       l=findMaxDepth(s->leftc);
+       r=findMaxDepth(s->rightc);
+       return r>l?r+1:l+1;
+}
+-----------------------------------------------------------------------------------------------------------------
+2)
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+struct tnode {
+	int data;
+	struct tnode * leftc;
+	struct tnode * rightc;
+};
+
+void insert(struct tnode **, int num);
+void inorder(struct tnode *);
+int getLeafCount(struct tnode* node);
+
+int main() {
+	struct tnode * root=NULL;
+	char ch[5];
+	int num;
+	do {
+		printf("Enter the element to be inserted in the tree\n");
+		scanf("%d",&num);
+		insert(&root, num);
+		printf("Do you want to insert another element?\n");
+		scanf("%s",ch);
+	}while(strcmp(ch,"yes")==0);
+
+	printf("The elements in the tree are");
+	inorder(root);
+	printf("\n");
+	printf("The number of leaf nodes in the tree is %d\n",getLeafCount(root));
+	return 0;
+}
+
+void insert(struct tnode ** s, int num) {
+	if((*s) == NULL) {
+		(*s) = (struct tnode *) malloc( sizeof (struct tnode));
+		(*s)->data = num;
+		(*s)->leftc = NULL;
+		(*s)->rightc = NULL;
+	}
+	else 	{
+		if(num < (*s)->data)
+		  insert(&( (*s)->leftc ), num);
+		else
+		  insert(&( (*s)->rightc ), num);
+	}
+}
+
+void inorder(struct tnode * s) {
+   if(s==0)
+   return;
+   inorder(s->leftc);
+   printf("%d ",s->data);
+   inorder(s->rightc);
+}
+
+int getLeafCount(struct tnode* s) {
+    if(s==0)
+    {
+        return 0;
+    }
+    if(s->leftc ==0 && s->rightc==0)
+    {
+        return 1;
+    }
+    return(getLeafCount(s->leftc)+getLeafCount(s->rightc));
+}
+----------------------------------------------------------------------------------------------------
+3)
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+struct tnode
+{
+	int data;
+	struct tnode * leftc;
+	struct tnode * rightc;
+};
+
+void insert(struct tnode **, int num);
+void inorder(struct tnode *);
+void printLevelOrder(struct tnode* root);
+void printGivenLevel(struct tnode* root, int level);
+int height(struct tnode* node);
+
+
+int main()
+{
+	struct tnode * root=NULL;
+	char ch[5];
+	int num;
+	do  {
+		printf("Enter the element to be inserted in the tree\n");
+		scanf("%d",&num);
+		insert(&root, num);
+		printf("Do you want to insert another element?\n");
+		scanf("%s",ch);
+	}while(strcmp(ch,"yes")==0);
+
+	printf("Inorder Traversal : The elements in the tree are");
+	inorder(root);
+	printf("\n");
+	printf("The elements in the tree in level order are");
+	printLevelOrder(root);
+	printf("\n");
+	return 0;
+}
+
+void insert(struct tnode ** s, int num) {
+	if((*s) == NULL) 	{
+		(*s) = (struct tnode *) malloc( sizeof (struct tnode));
+		(*s)->data = num;
+		(*s)->leftc = NULL;
+		(*s)->rightc = NULL;
+	}
+	else 	{
+	if(num < (*s)->data)
+	  insert(&( (*s)->leftc ), num);
+	else
+	  insert(&( (*s)->rightc ), num);
+	}
+}
+
+void inorder(struct tnode * s)  {
+	if(s != NULL) 	{
+		inorder(s->leftc);
+		printf(" %d",s->data);
+		inorder(s->rightc);
+	}
+}
+
+ 
+/* Function to print level order traversal a tree*/
+void printLevelOrder(struct tnode* root)  {
+  int h = height(root);
+  int i;
+  for(i=1; i<=h; i++)
+    printGivenLevel(root, i);
+}    
+ 
+/* Print nodes at a given level */
+void printGivenLevel(struct tnode* s, int level)  {
+ /*--------Fill your code here-----------*/
+     if(s==0)
+    {
+        return;
+    }
+    if(level==1)
+    {
+        printf("%d ",s->data);
+        return;
+    }
+    else if(level>1)
+    {
+        printGivenLevel(s->leftc,level-1);
+         printGivenLevel(s->rightc,level-1);
+    }
+}
+ 
+int height(struct tnode* node) {
+   if (node==NULL)
+       return 0;
+   else    {
+     /* compute the height of each subtree */
+     int lheight = height(node->leftc);
+     int rheight = height(node->rightc);
+ 
+     /* use the larger one */
+     if (lheight > rheight)
+         return(lheight+1);
+     else return(rheight+1);
+   }
+}
+============================================================================================
